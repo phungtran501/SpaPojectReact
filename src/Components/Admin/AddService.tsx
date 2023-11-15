@@ -48,10 +48,6 @@ function AddService() {
   };
 
   const onsubmit = async (data: Service) => {
-    //data.id = data.id.toString().trim() === '' ? 0 : data.id;
-    //b1: get id from url --> routing 2
-    //b2: check insert/update
-    //if update -->data.id = param from url
 
     await HttpRequestHelper()
       .post("/api/Services/save", data)
