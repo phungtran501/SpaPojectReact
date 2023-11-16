@@ -159,7 +159,7 @@ embed,
 object,
 video {
   max-width: 100%;
-  height: auto;
+  /* height: auto; */
 }
 
 ul {
@@ -12297,4 +12297,26 @@ blockquote.vs-quote cite:before {
 
 .login-left-admin{
   margin-left: 420px;
+}
+.logo-5-page{
+  width: 260px;
+  height: 90px;
+}
+
+.img-about-us{
+  width: 270px;
+  height: 300px;
+}
+
+.login-register{
+  padding-left: 1000px;
+}
+.img-quote{
+  background-image: url(../img/quote.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.login-admin{
+  padding-left: 1100px;
 }

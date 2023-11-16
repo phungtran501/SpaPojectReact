@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { css } from "@emotion/css";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import { useForm } from "react-hook-form";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -86,14 +86,16 @@ function ProductForm() {
   return (
     <>
       <section>
-        <div className="container">
-          <div className="row ">
-            <div className="col-lg-4 login-left-admin">
-              <div className="text-center text-lg-start">
+        <div className="container space">
+        <div className="col-lg-6">
+          <div className="text-center text-lg-start">
                 <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
-                  Product Form
+                Product Form
                 </h2>
               </div>
+              </div>
+          <div className="row ">
+            <div className="col-lg-6">
               <ToastContainer />
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
                 <div className="form-group">
@@ -167,14 +169,14 @@ function ProductForm() {
                 <div className="form-group">
                   <button
                     type="submit"
-                    className="btn btn-outline-primary col-lg-3 btn-submit-login-admin"
+                    className="btn btn-outline-primary col-lg-3"
                   >
                     Submit
-                  </button>
+                  </button>&nbsp;
                   <Link
                     to="/admin/products"
                     className={
-                      "btn btn-outline-primary col-lg-3 btn-submit-login-admin"
+                      "btn btn-outline-primary col-lg-3"
                     }
                   >
                     Cancel

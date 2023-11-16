@@ -6,7 +6,7 @@ function Footer ()  {
             <div className="container">
                 <div className="row justify-content-between align-items-center">
                     <div className="col-md-auto text-center">
-                        <p className="copyright-text">Copyright <i className="fal fa-copyright"></i> 2023 <a href="index.html">Wellnez</a>. All Rights Reserved By <a href="https://themeforest.net/user/vecuro_themes">Vecuro</a></p>
+                        <p className="copyright-text">2023 <i className="fal fa-copyright"></i>Woman Health Spa</p>
                     </div>
                 </div>
             </div>

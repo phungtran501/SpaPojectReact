@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import DataTable from "react-data-table-component";
-import { Link, NavLink, Navigate, redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import '../../assets/css/DataTable.css'
+
 interface Service {
   action: string;
   name: string;
@@ -57,8 +59,8 @@ function ServiceList() {
       name:  "Action",
       selector: (row:any) => (
         <>
-          <button onClick={() => deleteService(row.id)}>Delete</button>
-          <button onClick={() => onEdit(row.id)}>Edit</button>
+          <button className="btn btn-primary btn-sm" onClick={() => deleteService(row.id)}>Delete</button>&nbsp;
+          <button className="btn btn-primary btn-sm" onClick={() => onEdit(row.id)}>Edit</button>
         </>
       ),
     },
@@ -78,7 +80,7 @@ function ServiceList() {
         <div className="col-12">
           <h3>Service List</h3>
 
-          <button onClick={() => addService()}>Add Service</button>
+          <button className="btn btn-primary btn-sm" onClick={() => addService()}>Add Service</button>
 
           
           <DataTable

@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { css } from "@emotion/css";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import { set, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 interface Service {
   id: number;
   name: string;
@@ -48,6 +48,10 @@ function AddService() {
   };
 
   const onsubmit = async (data: Service) => {
+    //data.id = data.id.toString().trim() === '' ? 0 : data.id;
+    //b1: get id from url --> routing 2
+    //b2: check insert/update
+    //if update -->data.id = param from url
 
     await HttpRequestHelper()
       .post("/api/Services/save", data)
@@ -61,14 +65,16 @@ function AddService() {
   return (
     <>
       <section>
-        <div className="container">
-          <div className="row ">
-            <div className="col-lg-4 login-left-admin">
-              <div className="text-center text-lg-start">
+        <div className="container space">
+        <div className="col-lg-6">
+          <div className="text-center text-lg-start">
                 <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
-                  Service Form
+                Service Form
                 </h2>
               </div>
+              </div>
+          <div className="row ">
+            <div className="col-lg-6">
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Service Name</label>
@@ -118,12 +124,22 @@ function AddService() {
                     Is Active
                   </label>
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-outline-primary col-lg-3 btn-submit-login-admin"
-                >
-                  Submit
-                </button>
+                <div className="form-group">
+                  <button
+                    type="submit"
+                    className="btn btn-outline-primary col-lg-3"
+                  >
+                    Submit
+                  </button>&nbsp;
+                  <Link
+                    to="/admin/services"
+                    className={
+                      "btn btn-outline-primary col-lg-3"
+                    }
+                  >
+                    Cancel
+                  </Link>
+                </div>
               </form>
             </div>
           </div>

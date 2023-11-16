@@ -61,8 +61,8 @@ function AccountList() {
       name:  "Action",
       selector: (row:any) => (
         <>
-          <button onClick={() => deleteAccount(row.id)}>Delete</button>
-          <button onClick={() => onEdit(row.id)}>Edit</button>
+          <button className="btn btn-primary btn-sm" onClick={() => deleteAccount(row.id)}>Delete</button>&nbsp;
+          <button className="btn btn-primary btn-sm" onClick={() => onEdit(row.id)}>Edit</button>
         </>
       ),
     },
@@ -98,7 +98,7 @@ function AccountList() {
         <div className="col-12">
           <h3>Account List</h3>
 
-          <button onClick={() => addAccount()}>Add Account</button>
+          <button className="btn btn-primary btn-sm" onClick={() => addAccount()}>Add Account</button>
 
           
           <DataTable

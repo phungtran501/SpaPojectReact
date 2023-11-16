@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import logo from '../../assets/img/logo-5.jpg';
 
 function Header() {
   return (
@@ -7,7 +8,7 @@ function Header() {
         <div className="container">
           <div className="row justify-content-center justify-content-md-between align-items-center">
             <div className="col-auto d-none d-md-block">
-              <div className="social-style1">
+              <div className="social-style1 login-register">
                 <NavLink to="/login" className={"nav-link"}>
                   Login
                 </NavLink>{" "}
@@ -24,6 +25,11 @@ function Header() {
         <div className="sticky-active">
           <div className="container">
             <div className="row justify-content-between align-items-center gx-60">
+            <div className="col-auto">
+                            <div className="header-logo">
+                                <Link to="/"><img src={logo} alt="logo" className="logo-5-page"/></Link>
+                            </div>
+                        </div>
               <div className="col-auto">
                 <nav className="main-menu menu-style1 d-none d-lg-block">
                   <ul>

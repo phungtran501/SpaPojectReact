@@ -85,14 +85,17 @@ function AppointmentForm() {
   return (
     <>
       <section>
-        <div className="container">
-          <div className="row ">
-            <div className="col-lg-4 login-left-admin">
-              <div className="text-center text-lg-start">
+        <div className="container space">
+        <div className="col-lg-6">
+          <div className="text-center text-lg-start">
                 <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
                   Appointment Form
                 </h2>
               </div>
+              </div>
+          <div className="row ">
+
+            <div className="col-lg-6">
               <ToastContainer />
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
                 <div className="form-group">
