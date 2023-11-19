@@ -1,17 +1,14 @@
-import {NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 function HeaderAdmin() {
   return (
     <>
-          <div className="header-top">
+      <div className="header-top">
         <div className="container">
           <div className="row justify-content-center justify-content-md-between align-items-center">
             <div className="col-auto d-none d-md-block">
               <div className="social-style1 login-admin">
-                <NavLink to="/login" className={"nav-link"}>
-                  Login
-                </NavLink>
-                
+                <NavLink to="/admin/login" className={"nav-link"}>Login</NavLink>
               </div>
             </div>
           </div>

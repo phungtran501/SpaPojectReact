@@ -4,28 +4,32 @@ import icon from "../assets/img/icons/sec-bg-icon.svg";
 import React, { useEffect, useState } from "react";
 import HttpRequestHelper from "../utilities/HttpRequestHelper";
 import icon1 from "../assets/img/icons/sr-7-4.svg";
+import { useNavigate } from "react-router-dom";
 
 interface Service {
-    id: number;
-    name: string;
-    description: string;
-  }
+  id: number;
+  name: string;
+  description: string;
+}
 
 function Home() {
+  const [services, setService] = useState<Service[]>([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    getService();
+  }, []);
 
-    const [services, setService] = useState<Service[]>([]);
+  const detailService = (id: number) => {
+    return navigate(`/services/${id}`);
+  };
 
-    useEffect(() => {
-        getService();
-      }, []);
-
-    const getService = async () => {
-        const services = await HttpRequestHelper().get(
-          "/api/services/get-services"
-        );
-        setService(services);
-      };
+  const getService = async () => {
+    const services = await HttpRequestHelper().get(
+      "/api/services/get-services"
+    );
+    setService(services);
+  };
 
   return (
     <div>
@@ -81,8 +85,7 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <section className="bg-light-4 space-top space">
+      <section className="bg-light-4 space-top">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div
@@ -103,40 +106,35 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="row gx-2px gy-gx justify-content-center wow fadeInUp" data-wow-delay="0.2s">
-          {services.map((service, index) => (
-            <div className="col-md-6 col-lg-4 col-xl-3">
-            
-
-                
-
-              <div className="service-style5" key={index}>
-                <div className="service-icon">
-                  <img src={icon1} alt="icon" />
+          <div
+            className="row gx-2px gy-gx justify-content-center wow fadeInUp"
+            data-wow-delay="0.2s"
+          >
+            {services.map((service, index) => (
+              <div className="col-md-6 col-lg-4 col-xl-3">
+                <div className="service-style5" key={index}>
+                  <div className="service-icon">
+                    <img src={icon1} alt="icon" />
+                  </div>
+                  <div className="service-content">
+                    <h3 className="service-title h4">
+                      <a className="text-inherit">{service.name}</a>
+                    </h3>
+                    {/* <p className="service-text">{service.description}</p> */}
+                  </div>
+                  <a
+                    className="service-btn"
+                    onClick={() => detailService(service.id)}
+                  >
+                    <i className="far fa-plus"></i>
+                  </a>
                 </div>
-                <div className="service-content">
-                  <h3 className="service-title h4">
-                    <a className="text-inherit" href="service-details.html">
-                      {service.name}
-                    </a>
-                  </h3>
-                  <p className="service-text">
-                    {service.description}
-                  </p>
-                </div>
-                <a href="service-details.html" className="service-btn">
-                  <i className="far fa-plus"></i>
-                </a>
               </div>
-
-            </div>
-                            ))
-                        }
+            ))}
           </div>
         </div>
       </section>
-
-      <section className="space">
+      <section>
         <div className="text-center space img-quote">
           <div className="d-inline-flex mb-4 pb-1">
             <div className="circle-btn style2">

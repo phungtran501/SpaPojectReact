@@ -1,17 +1,35 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from '../../assets/img/logo-5.jpg';
+import logo from "../../assets/img/logo-5.jpg";
 
 function Header() {
   return (
-    <div>
+    <>
       <div className="header-top">
         <div className="container">
           <div className="row justify-content-center justify-content-md-between align-items-center">
+            <div className="col-auto text-center py-2 py-md-0">
+              <div className="header-links style-white">
+                <ul>
+                  <li className="d-none d-xxl-inline-block">
+                    <i className="far fa-map-marker-alt"></i>121 King St.
+                    Melbourne VIC 3000, Australia
+                  </li>
+                  <li>
+                    <i className="far fa-phone-alt"></i>
+                    <a href="tel:+25632542598">(+256) 3254 2598</a>
+                  </li>
+                  <li>
+                    <i className="far fa-envelope"></i>
+                    <a href="mailto:example@Wellnez.com">example@Wellnez.com</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div className="col-auto d-none d-md-block">
-              <div className="social-style1 login-register">
+              <div className="social-style1">
                 <NavLink to="/login" className={"nav-link"}>
                   Login
-                </NavLink>{" "}
+                </NavLink>
                 &nbsp;
                 <NavLink to="/register" className={"nav-link"}>
                   Register
@@ -25,11 +43,13 @@ function Header() {
         <div className="sticky-active">
           <div className="container">
             <div className="row justify-content-between align-items-center gx-60">
-            <div className="col-auto">
-                            <div className="header-logo">
-                                <Link to="/"><img src={logo} alt="logo" className="logo-5-page"/></Link>
-                            </div>
-                        </div>
+              <div className="col-auto">
+                <div className="header-logo">
+                  <Link to="/">
+                    <img src={logo} alt="logo" className="logo-5-page" />
+                  </Link>
+                </div>
+              </div>
               <div className="col-auto">
                 <nav className="main-menu menu-style1 d-none d-lg-block">
                   <ul>
@@ -43,16 +63,15 @@ function Header() {
                         About Us
                       </NavLink>
                     </li>
-                    <li className="menu-item-has-children">
-                      <a href="match.html">Service</a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a href="service.html">Services</a>
-                        </li>
-                        <li>
-                          <a href="service-details.html">Service Details</a>
-                        </li>
-                      </ul>
+                    <li>
+                      <NavLink to="/services" className={"nav-link"}>
+                        Service
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/product" className={"nav-link"}>
+                        Product
+                      </NavLink>
                     </li>
                   </ul>
                 </nav>
@@ -71,7 +90,7 @@ function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

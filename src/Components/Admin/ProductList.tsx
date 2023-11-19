@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
-import DataTable from "react-data-table-component";
+import DataTable, {  } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import CommonHelper from "../../utilities/CommonHelper";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../assets/css/DataTable.css";
 
 interface Product {
   name: string;
-  decription: string;
+  description: string;
   price: boolean;
   serviceName: string;
   createOn: Date;
@@ -22,7 +22,6 @@ function ProductList() {
 
   useEffect(() => {
     getList(1);
-
   }, []);
 
   //show list account
@@ -39,7 +38,7 @@ function ProductList() {
   //event delete account
   const deleteProduct = async (id: number) => {
     const response = await HttpRequestHelper().delete(`/api/product/${id}`);
-    if(response){
+    if (response) {
       getList(1);
     }
   };
@@ -64,38 +63,33 @@ function ProductList() {
   const addProduct = () => {
     return navigate(`/admin/product-form`);
   };
-  const columns = [
+  const columns: any = [
     {
       name: "Action",
       selector: (row: any) => (
         <>
-          <button className="btn btn-primary btn-sm" onClick={() => deleteProduct(row.id)}>Delete</button>&nbsp;
-          <button className="btn btn-primary btn-sm" onClick={() => onEdit(row.id)}>Edit</button>
+          <span
+            className="cursor-pointer"
+            onClick={() => deleteProduct(row.id)}
+          >
+            <i className="bi bi-trash"></i>
+          </span>
+          &nbsp;
+          <span className="cursor-pointer"
+            
+            onClick={() => onEdit(row.id)}
+          >
+            <i className="bi bi-pencil"></i>
+          </span>
         </>
       ),
+      width: '70px',
     },
-    {
-      name: "Service Name",
-      selector: (row: any) => ( <span className="text-primary">{row.serviceName}</span>
-        
-        ),
-    },
-    {
-      name: "Product Name",
-      selector: (row: any) => row.name,
-    },
-    {
-      name: "Description",
-      selector: (row: any) => row.decription,
-    },
-    {
-      name: "Price",
-      selector: (row: any) => row.price,
-    },
-    {
-      name: "Create On",
-      selector: (row: any) => CommonHelper().formatDate(row.createOn),
-    },
+    { name: "Service Name", selector: (row: any) => row.serviceName},
+    { name: "Product Name", selector: (row: any) => row.name},
+    { name: "Description", selector: (row: any) => row.description},
+    { name: "Price", selector: (row: any) => row.price},
+    { name: "Create On", selector: (row: any) => CommonHelper().formatDate(row.createOn),},
   ];
 
   return (
@@ -103,9 +97,12 @@ function ProductList() {
       <div className="row">
         <div className="col-12">
           <h3>Product List</h3>
-          
-          <button className="btn btn-primary btn-sm" onClick={() => addProduct()}>Add Product</button>
-
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => addProduct()}
+          >
+            Add Product
+          </button>
           <DataTable
             columns={columns}
             data={product}

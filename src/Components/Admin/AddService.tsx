@@ -16,7 +16,6 @@ const errorInput = css`
 `;
 
 function AddService() {
-
   const { id } = useParams();
 
   const {
@@ -27,10 +26,9 @@ function AddService() {
   } = useForm<Service>();
 
   useEffect(() => {
-    if(id){
+    if (id) {
       getService(id);
     }
-    
   }, [id]);
 
   const getService = async (id: any) => {
@@ -48,11 +46,6 @@ function AddService() {
   };
 
   const onsubmit = async (data: Service) => {
-    //data.id = data.id.toString().trim() === '' ? 0 : data.id;
-    //b1: get id from url --> routing 2
-    //b2: check insert/update
-    //if update -->data.id = param from url
-
     await HttpRequestHelper()
       .post("/api/Services/save", data)
       .then((response) => {
@@ -65,78 +58,42 @@ function AddService() {
   return (
     <>
       <section>
-        <div className="container space">
-        <div className="col-lg-6">
-          <div className="text-center text-lg-start">
-                <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
-                Service Form
-                </h2>
-              </div>
-              </div>
+        <div className="container mt-4">
+          <div className="col-lg-6">
+            <div className="text-center text-lg-start">
+              <h3 className="sec-title3 text-uppercase mb-xxl-2 pb-xxl-1">Service Form</h3>
+            </div>
+          </div>
           <div className="row ">
             <div className="col-lg-6">
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Service Name</label>
                   <input type="hidden" {...register("id")}></input>
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={"name"}
-                    {...register("name", {
-                      required: "Name service must be not empty",
-                    })}
-                    placeholder="Enter service name"
-                  />
-                  {errors.name && (
-                    <span className={errorInput}>{errors.name.message}</span>
-                  )}
+                  <input type="text" className="form-control" placeholder="Enter service name"
+                    {...register("name", { required: "Name service must be not empty"})}/>
+                  {errors.name && (<span className={errorInput}>{errors.name.message}</span>)}
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputPassword1">Description</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={"description"}
-                    {...register("description", {
-                      required: "Description service must be not empty",
-                    })}
-                    placeholder="Enter service name"
-                  />
-                  {errors.description && (
-                    <span className={errorInput}>
-                      {errors.description.message}
-                    </span>
-                  )}
+                  <textarea rows={5}
+                    className="form-control" placeholder="Enter service name"
+                    {...register("description", { required: "Description service must be not empty"})}/>
+                  {errors.description && (<span className={errorInput}>{errors.description.message}</span>)}
                 </div>
                 <div className="form-check form-switch">
-                  <input
-                    className="form-check-input"
-                    defaultValue={"isActive"}
-                    type="checkbox"
-                    checked
-                    {...register("isActive")}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexSwitchCheckChecked"
-                  >
+                  <input className="form-check-input" defaultValue={"isActive"} type="checkbox" checked
+                    {...register("isActive")}/>
+                  <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
                     Is Active
                   </label>
                 </div>
                 <div className="form-group">
-                  <button
-                    type="submit"
-                    className="btn btn-outline-primary col-lg-3"
-                  >
+                  <button type="submit" className="btn btn-outline-primary col-lg-3">
                     Submit
-                  </button>&nbsp;
-                  <Link
-                    to="/admin/services"
-                    className={
-                      "btn btn-outline-primary col-lg-3"
-                    }
-                  >
+                  </button>
+                  &nbsp;
+                  <Link to="/admin/services" className={"btn btn-outline-primary col-lg-3"}>
                     Cancel
                   </Link>
                 </div>

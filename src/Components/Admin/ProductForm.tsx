@@ -42,11 +42,11 @@ function ProductForm() {
   useEffect(() => {
     getListService();
     if (id) {
-      getProduct(id);
+      getProduct(parseInt(id));
     }
   }, [id]);
 
-  const getProduct = async (id: any) => {
+  const getProduct = async (id: number) => {
     try {
       const response = await HttpRequestHelper().get(
         `/api/product/${id}/detail`
@@ -86,15 +86,15 @@ function ProductForm() {
   return (
     <>
       <section>
-        <div className="container space">
-        <div className="col-lg-6">
-          <div className="text-center text-lg-start">
-                <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
+        <div className="container mt-4">
+          <div className="col-lg-6">
+            <div className="text-center text-lg-start">
+              <h3 className="sec-title3 text-uppercase mb-xxl-2 pb-xxl-1">
                 Product Form
-                </h2>
-              </div>
-              </div>
-          <div className="row ">
+              </h3>
+            </div>
+          </div>
+          <div className="row mt-3">
             <div className="col-lg-6">
               <ToastContainer />
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
@@ -167,18 +167,11 @@ function ProductForm() {
                   </label>
                 </div>
                 <div className="form-group">
-                  <button
-                    type="submit"
-                    className="btn btn-outline-primary col-lg-3"
-                  >
+                  <button type="submit" className="btn btn-outline-primary col-lg-3">
                     Submit
-                  </button>&nbsp;
-                  <Link
-                    to="/admin/products"
-                    className={
-                      "btn btn-outline-primary col-lg-3"
-                    }
-                  >
+                  </button>
+                  &nbsp;
+                  <Link to="/admin/products" className={"btn btn-outline-primary col-lg-3"}>
                     Cancel
                   </Link>
                 </div>

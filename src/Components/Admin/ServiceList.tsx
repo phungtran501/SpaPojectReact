@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
-import DataTable from "react-data-table-component";
+import DataTable, { Selector, TableColumn } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import '../../assets/css/DataTable.css'
+import "../../assets/css/DataTable.css";
+
 
 interface Service {
   action: string;
@@ -22,7 +23,9 @@ function ServiceList() {
 
   const getList = async (pageIndex: number, pageSize: number = 10) => {
     setLoading(true);
-    const response = await HttpRequestHelper().get(`/api/services/get-list?page=${pageIndex}&per_page=${pageSize}`);
+    const response = await HttpRequestHelper().get(
+      `/api/services/get-list?page=${pageIndex}&per_page=${pageSize}`
+    );
     setService(response);
     setTotalRows(response.service);
     setLoading(false);
@@ -30,43 +33,55 @@ function ServiceList() {
 
   //event delete service
   const deleteService = async (id: any) => {
-    const response = await HttpRequestHelper().delete(`/api/services/${id}`)
-   
-  }
+     await HttpRequestHelper().delete(`/api/services/${id}`);
+  };
 
-  /* 
-  * event change pageIndex
-  */
+  /*
+   * event change pageIndex
+   */
   const handlePageChange = (page: any) => {
     getList(page);
   };
 
-  /* 
-  * event change dropdownlist pageSize
-  */
+  /*
+   * event change dropdownlist pageSize
+   */
   const handlePerRowsChange = async (pageSize: number, pageIndex: number) => {
     getList(pageIndex, pageSize);
   };
 
-  const onEdit = (id: number)=>{
+  const onEdit = (id: number) => {
     return navigate(`/admin/service/${id}/detail`);
-  }
-  const addService = ()=>{
+  };
+  const addService = () => {
     return navigate(`/admin/service`);
-  }
-  const columns = [
+  };
+  const columns: any = [
     {
-      name:  "Action",
-      selector: (row:any) => (
+      name: "Action",
+      selector: (row: any)=> (
         <>
-          <button className="btn btn-primary btn-sm" onClick={() => deleteService(row.id)}>Delete</button>&nbsp;
-          <button className="btn btn-primary btn-sm" onClick={() => onEdit(row.id)}>Edit</button>
+          <span
+            className="cursor-pointer"
+            onClick={() => deleteService(row.id)}
+          >
+            <i className="bi bi-trash"></i>
+          </span>
+          &nbsp;
+          <span className="cursor-pointer"
+            
+            onClick={() => onEdit(row.id)}
+          >
+            <i className="bi bi-pencil"></i>
+          </span>
         </>
       ),
+      width: '70px',
     },
     {
       name: "Name Service",
       selector: (row: any) => row.name,
+      width: '250px'
     },
     {
       name: "Description",
@@ -80,9 +95,13 @@ function ServiceList() {
         <div className="col-12">
           <h3>Service List</h3>
 
-          <button className="btn btn-primary btn-sm" onClick={() => addService()}>Add Service</button>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => addService()}
+          >
+            Add Service
+          </button>
 
-          
           <DataTable
             columns={columns}
             data={service}

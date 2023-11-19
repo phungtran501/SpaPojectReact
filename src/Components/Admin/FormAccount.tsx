@@ -78,14 +78,14 @@ function FormAccount() {
   return (
     <>
       <section>
-        <div className="container space">
-        <div className="col-lg-6">
-          <div className="text-center text-lg-start">
-                <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
+        <div className="container mt-4">
+          <div className="col-lg-6">
+            <div className="text-center text-lg-start">
+              <h3 className="sec-title3 text-uppercase mb-xxl-2 pb-xxl-1">
                 Account Form
-                </h2>
-              </div>
-              </div>
+              </h3>
+            </div>
+          </div>
           <div className="row ">
             <div className="col-lg-6">
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
@@ -103,25 +103,16 @@ function FormAccount() {
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">User Name</label>
                   <input type="hidden" {...register("id")}></input>
-                  <input
-                    type="text"
-                    className="form-control"
+                  <input type="text" className="form-control" placeholder="Enter username"
                     {...register("username", {
                       required: "User Name service must be not empty",
                     })}
-                    placeholder="Enter username"
                   />
-                  {errors.username && (
-                    <span className={errorInput}>
-                      {errors.username.message}
-                    </span>
-                  )}
+                  {errors.username && (<span className={errorInput}>{errors.username.message}</span>)}
                 </div>
-                { !id ? (
+                {!id ? (
                   <div className="form-group">
-                    <input
-                      type="password"
-                      placeholder="Password"
+                    <input type="password" placeholder="Password"
                       {...register("password", {
                         required: "Password must be not empty",
                         pattern: {
@@ -139,7 +130,6 @@ function FormAccount() {
                 ) : (
                   <></>
                 )}
-
                 <div className="form-group">
                   <label htmlFor="exampleInputPassword1">FullName</label>
                   <input
@@ -223,18 +213,10 @@ function FormAccount() {
                   </label>
                 </div>
                 <div className="form-group">
-                  <button
-                    type="submit"
-                    className="btn btn-outline-primary col-lg-3"
-                  >
+                  <button type="submit" className="btn btn-outline-primary col-lg-3">
                     Submit
                   </button>&nbsp;
-                  <Link
-                    to="/admin/accounts"
-                    className={
-                      "btn btn-outline-primary col-lg-3"
-                    }
-                  >
+                  <Link to="/admin/accounts" className={"btn btn-outline-primary col-lg-3"}>
                     Cancel
                   </Link>
                 </div>

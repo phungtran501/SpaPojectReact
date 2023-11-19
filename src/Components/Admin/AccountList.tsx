@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import DataTable from "react-data-table-component";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface Account {
   username: string;
   fullname: string;
@@ -24,72 +24,64 @@ function AccountList() {
   //show list account
   const getList = async (pageIndex: number, pageSize: number = 10) => {
     setLoading(true);
-    const response = await HttpRequestHelper().get(`/api/account/get-list?page=${pageIndex}&per_page=${pageSize}`);
+    const response = await HttpRequestHelper().get(
+      `/api/account/get-list?page=${pageIndex}&per_page=${pageSize}`
+    );
     setAccount(response);
     setTotalRows(response.service);
     setLoading(false);
   };
 
-    //event delete account
-    const deleteAccount = async (id: string) => {
-      const response = await HttpRequestHelper().delete(`/api/account/${id}`)
-     
-    }
-    //event edit account
-    const onEdit = (id: string)=>{
-      return navigate(`/admin/account/${id}`);
-    }
-  /* 
-  * event change pageIndex
-  */
+  //event delete account
+  const deleteAccount = async (id: string) => {
+    const response = await HttpRequestHelper().delete(`/api/account/${id}`);
+  };
+  //event edit account
+  const onEdit = (id: string) => {
+    return navigate(`/admin/account/${id}`);
+  };
+  /*
+   * event change pageIndex
+   */
   const handlePageChange = (page: any) => {
     getList(page);
   };
 
-  /* 
-  * event change dropdownlist pageSize
-  */
+  /*
+   * event change dropdownlist pageSize
+   */
   const handlePerRowsChange = async (pageSize: number, pageIndex: number) => {
     getList(pageIndex, pageSize);
   };
 
-  const addAccount = ()=>{
+  const addAccount = () => {
     return navigate(`/admin/account-form`);
-  }
-  const columns = [
-    {
-      name:  "Action",
-      selector: (row:any) => (
-        <>
-          <button className="btn btn-primary btn-sm" onClick={() => deleteAccount(row.id)}>Delete</button>&nbsp;
-          <button className="btn btn-primary btn-sm" onClick={() => onEdit(row.id)}>Edit</button>
-        </>
-      ),
-    },
-    {
-      name: "UserName",
-      selector: (row: any) => row.username,
-    },
-    {
-      name: "Role",
-      selector: (row: any) => row.roleName,
-    },
-      {
-        name: "FullName",
-        selector: (row: any) => row.fullname,
-      },
-      {
-        name: "Email",
-        selector: (row: any) => row.email,
-      },
-      {
-        name: "Phone Number",
-        selector: (row: any) => row.phoneNumber,
-      },
-      {
-        name: "Address",
-        selector: (row: any) => row.address,
-      },
+  };
+  const columns: any = [
+    { name: "Action",selector: (row: any) => (
+      <>
+        <span
+          className="cursor-pointer"
+          onClick={() => deleteAccount(row.id)}
+        >
+          <i className="bi bi-trash"></i>
+        </span>
+        &nbsp;
+        <span className="cursor-pointer"
+          
+          onClick={() => onEdit(row.id)}
+        >
+          <i className="bi bi-pencil"></i>
+        </span>
+      </>
+    ),
+    width: '70px',},
+    { name: "UserName", selector: (row: any) => row.username},
+    { name: "Role", selector: (row: any) => row.roleName},
+    { name: "FullName", selector: (row: any) => row.fullname},
+    { name: "Email", selector: (row: any) => row.email},
+    { name: "Phone Number", selector: (row: any) => row.phoneNumber},
+    { name: "Address", selector: (row: any) => row.address},
   ];
 
   return (
@@ -97,10 +89,9 @@ function AccountList() {
       <div className="row">
         <div className="col-12">
           <h3>Account List</h3>
-
-          <button className="btn btn-primary btn-sm" onClick={() => addAccount()}>Add Account</button>
-
-          
+          <button className="btn btn-primary btn-sm" onClick={() => addAccount()}>
+            Add Account
+          </button>
           <DataTable
             columns={columns}
             data={account}

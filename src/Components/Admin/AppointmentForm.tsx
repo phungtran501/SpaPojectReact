@@ -67,17 +67,14 @@ function AppointmentForm() {
     data.id = !data.id ? 0 : data.id;
 
     const response = await HttpRequestHelper().post(
-      "/api/appointment/save",
-      data
-    );
+      "/api/appointment/save",data);
 
     if (response) {
       toast(response, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
 
       setTimeout(() => {
         return navigate(`/admin/appointments`);
-      },3000)
-
+      }, 3000);
     } else {
       toast(response, { type: toast.TYPE.ERROR, autoClose: 5000 });
     }
@@ -85,16 +82,13 @@ function AppointmentForm() {
   return (
     <>
       <section>
-        <div className="container space">
-        <div className="col-lg-6">
-          <div className="text-center text-lg-start">
-                <h2 className="sec-title3 h1 text-uppercase mb-xxl-2 pb-xxl-1">
-                  Appointment Form
-                </h2>
-              </div>
-              </div>
+        <div className="container mt-4">
+          <div className="col-lg-6">
+            <div className="text-center text-lg-start">
+              <h3 className="sec-title3 text-uppercase mb-xxl-2 pb-xxl-1">Appointment Form</h3>
+            </div>
+          </div>
           <div className="row ">
-
             <div className="col-lg-6">
               <ToastContainer />
               <form id="Service" onSubmit={handleSubmit(onsubmit)}>
@@ -103,21 +97,15 @@ function AppointmentForm() {
                   <select className="form-control" {...register("userId")}>
                     <option>Choose User</option>
                     {users.map((user, index) => (
-                      <option value={user.id} key={index}>
-                        {user.username}
-                      </option>
+                      <option value={user.id} key={index}>{user.username}</option>
                     ))}
                   </select>
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Note</label>
                   <input
-                    type="text"
-                    className="form-control"
-                    {...register("note", {
-                      required: "Note must be not empty",
-                    })}
-                    placeholder="Enter note"
+                    type="text" className="form-control" placeholder="Enter note"
+                    {...register("note", { required: "Note must be not empty"})}
                   />
                   {errors.note && (
                     <span className={errorInput}>{errors.note.message}</span>
@@ -125,33 +113,22 @@ function AppointmentForm() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputPassword1">Status</label>
-                  <input
-                    type="number"
-                    className="form-control"
+                  <input type="number" className="form-control" placeholder="Enter status"
                     {...register("status", {
                       required: "Status must be not empty",
                     })}
-                    placeholder="Enter status"
                   />
                   {errors.status && (
                     <span className={errorInput}>{errors.status.message}</span>
                   )}
                 </div>
                 <div className="form-group">
-                    <button
-                      type="submit"
-                      className="btn btn-outline-primary col-lg-3"
-                    >
-                      Submit
-                    </button>&nbsp;
-                    <Link
-                      to="/admin/products"
-                      className={
-                        "btn btn-outline-primary col-lg-3"
-                      }
-                    >
-                      Cancel
-                    </Link>
+                  <button type="submit" className="btn btn-outline-primary col-lg-3">
+                    Submit
+                  </button>&nbsp;
+                  <Link to="/admin/appointments" className={"btn btn-outline-primary col-lg-3"}>
+                    Cancel
+                  </Link>
                 </div>
               </form>
             </div>

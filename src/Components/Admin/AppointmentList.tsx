@@ -58,33 +58,28 @@ function AppointmentList() {
   const addAppointment = () => {
     return navigate(`/admin/appointment-form`);
   };
-  const columns = [
-    {
-      name: "Action",
-      selector: (row: any) => (
-        <>
-          <button className="btn btn-primary btn-sm" onClick={() => deleteAppointment(row.id)}>Delete</button>&nbsp;
-          <button className="btn btn-primary btn-sm" onClick={() => onEdit(row.id)}>Edit</button>
-        </>
-      ),
-    },
-    {
-      name: "Username",
-      selector: (row: any) => ( row.userName),
-    },
-    {
-      name: "Note",
-      selector: (row: any) => row.note,
-    },
-    {
-        name: "Created On",
-        selector: (row: any) => CommonHelper().formatDate(row.createdOn),
-      },
-    {
-      name: "Status",
-      selector: (row: any) => row.status,
-    },
-    
+  const columns: any = [
+    { name: "Action", selector: (row: any) => ( <>
+      <span
+        className="cursor-pointer"
+        onClick={() => deleteAppointment(row.id)}
+      >
+        <i className="bi bi-trash"></i>
+      </span>
+      &nbsp;
+      <span className="cursor-pointer"
+        
+        onClick={() => onEdit(row.id)}
+      >
+        <i className="bi bi-pencil"></i>
+      </span>
+    </>
+  ),
+  width: '70px',},
+    { name: "Username", selector: (row: any) => row.userName},
+    { name: "Note", selector: (row: any) => row.note},
+    { name: "Created On", selector: (row: any) => CommonHelper().formatDate(row.createdOn)},
+    { name: "Status", selector: (row: any) => row.status},
   ];
 
   return (
@@ -92,9 +87,9 @@ function AppointmentList() {
       <div className="row">
         <div className="col-12">
           <h3>Appointment List</h3>
-
-          <button className="btn btn-primary btn-sm" onClick={() => addAppointment()}>Add Appointment</button>
-
+          <button className="btn btn-primary btn-sm" onClick={() => addAppointment()}>
+            Add Appointment
+          </button>
           <DataTable
             columns={columns}
             data={appointment}

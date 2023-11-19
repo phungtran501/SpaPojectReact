@@ -497,7 +497,7 @@ select,
 .form-select,
 textarea,
 input {
-  height: 60px;
+  height: 50px;
   padding: 0 45px 0 30px;
   border: 1px solid var(--border-color);
   color: var(--body-color);
@@ -2362,7 +2362,7 @@ textarea.is-invalid {
 }
 
 .social-style1 {
-  background-color: #2d353c;
+  /* background-color: #2d353c; */
   padding: 10px 25px;
 }
 .social-style1 a:hover {
