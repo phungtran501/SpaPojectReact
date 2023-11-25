@@ -1,10 +1,19 @@
 import axios from "axios";
 
+const baseURL = 'https://localhost:44309';
+
 const HttpRequestHelper = () => {
     const axiosInstance = axios.create({
-        baseURL: 'https://localhost:44309',
+        baseURL,
         headers: {
             'Content-Type' : 'application/json'
+        }
+    });
+
+    const axiosFile = axios.create({
+        baseURL,
+        headers: {
+            'Content-Type': 'multipart/form-data',
         }
     });
 
@@ -26,6 +35,19 @@ const HttpRequestHelper = () => {
         }
     }
 
+    const postWithFile = async (url, data) => {
+        try {
+            const response = await axios.post(`${baseURL}${url}`, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     const deleteHandler = async(url) => {
         try {
             const response = await axiosInstance.delete(url);
@@ -37,9 +59,11 @@ const HttpRequestHelper = () => {
     }
 
     return {
+        baseURL,
         get,
         post,
-        delete : deleteHandler
+        delete : deleteHandler,
+        postWithFile,
     }
 }
 

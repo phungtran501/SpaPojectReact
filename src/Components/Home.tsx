@@ -10,6 +10,7 @@ interface Service {
   id: number;
   name: string;
   description: string;
+  image: any;
 }
 
 function Home() {
@@ -85,7 +86,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-light-4 space-top">
+      <section className="bg-light-4 space-top pb-5">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div
@@ -107,14 +108,15 @@ function Home() {
             </div>
           </div>
           <div
-            className="row gx-2px gy-gx justify-content-center wow fadeInUp"
+            className="row gx-2px gy-gx wow fadeInUp"
             data-wow-delay="0.2s"
           >
             {services.map((service, index) => (
-              <div className="col-md-6 col-lg-4 col-xl-3">
-                <div className="service-style5" key={index}>
+              <div className="col-md-6 col-lg-4 col-xl-3" key={index}>
+                <div className="service-style5">
                   <div className="service-icon">
-                    <img src={icon1} alt="icon" />
+                    <img src={`${HttpRequestHelper().baseURL}/image/service/${service.id}.png`} 
+                      alt="icon" style={{height: "50px"}} />
                   </div>
                   <div className="service-content">
                     <h3 className="service-title h4">
