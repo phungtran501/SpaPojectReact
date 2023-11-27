@@ -39,7 +39,7 @@ const ProductPage = () => {
                   <div className="row justify-content-between align-items-center"></div>
                 </div>
                 <div className="row">
-                  <ProductItems products={products} />
+                  <ProductItems sanpham={products} />
 
                   <ReactPaginate
                     className="pagination-tool"

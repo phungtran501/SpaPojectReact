@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Product } from "./Model/ProductModel";
+import HttpRequestHelper from "../../utilities/HttpRequestHelper"
 
 
-function ProductItems(props:any) {
+interface ProductItemsProps {
+    sanpham: Product[]; 
+}
+
+const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
     const navigate = useNavigate();
 
     const detailProduct = (id: number) => {
@@ -12,26 +17,21 @@ function ProductItems(props:any) {
     const detailService = (id: number) => {
       return navigate(`/services/${id}`);
     };
-
-    
     
     return (
       <>
-        {props.products.map((product: Product, index: number) => {
+        {sanpham.map((product: Product, index: number) => {
             return (
                 <div className="col-md-6 col-xl-3">
                     <div className="vs-product product-style2" key={index}>
                         <div className="product-img">
                             <a href="shop-details.html">
                                 <img
-                                    src="assets/img/product/p-2-1.png"
+                                    src={`${HttpRequestHelper().baseURL}/image/product/${product.id}.png`}
                                     alt="product"
                                     className="w-100" />
                             </a>
                             <div className="actions">
-                                <a href="#" className="icon-btn">
-                                    <i className="far fa-heart"></i>
-                                </a>
                                 <a href="#" className="icon-btn">
                                     <i className="far fa-eye"></i>
                                 </a>

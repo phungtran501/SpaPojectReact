@@ -1,4 +1,3 @@
-import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AboutUs from "./Components/AboutUs";
 import MasterPage from "./Components/UI/MasterPage/MasterPage";
@@ -19,15 +18,18 @@ import AppointmentList from "./Components/Admin/AppointmentList";
 import AppointmentForm from "./Components/Admin/AppointmentForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ServicePage from "./Components/ServicePage";
+import ServiceDetail from "./Components/ServiceDetail";
 import ProductPage from "./Components/Products/ProductPage";
-
+import PlanList from "./Components/Admin/PlanList";
+import PlanForm from "./Components/Admin/PlanForm";
+import ServicePage from "./Components/ServicePage";
 
 function App() {
   const commonRoutes = [
     { path: "/", element: <Home /> },
     { path: "/about", element: <AboutUs /> },
-    { path: "/services/:id", element: <ServicePage /> },
+    { path: "/service-page", element: <ServicePage /> },
+    { path: "/services/:id", element: <ServiceDetail /> },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/product/:id", element: <ProductDetail /> },
@@ -49,6 +51,9 @@ function App() {
     { path: '/admin/appointments', element: <AppointmentList /> },
     { path: '/admin/appointment-form', element: <AppointmentForm /> },
     { path: '/admin/appointment/:id', element: <AppointmentForm /> },
+    { path: '/admin/plans', element: <PlanList /> },
+    { path: '/admin/plan-form', element: <PlanForm /> },
+    { path: '/admin/plan/:id', element: <PlanForm /> },
   ];
 
   const router = createBrowserRouter([

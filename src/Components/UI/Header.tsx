@@ -11,16 +11,15 @@ function Header() {
               <div className="header-links style-white">
                 <ul>
                   <li className="d-none d-xxl-inline-block">
-                    <i className="far fa-map-marker-alt"></i>121 King St.
-                    Melbourne VIC 3000, Australia
+                    <i className="far fa-map-marker-alt"></i>Hung Loi, q.Ninh Kieu, tp.CanTho
                   </li>
                   <li>
                     <i className="far fa-phone-alt"></i>
-                    <a href="tel:+25632542598">(+256) 3254 2598</a>
+                    <a href="tel:0767951944">0767951944</a>
                   </li>
                   <li>
                     <i className="far fa-envelope"></i>
-                    <a href="mailto:example@Wellnez.com">example@Wellnez.com</a>
+                    <a href="mailto:tmphung1101@gmail.com">tmphung1101@gmail.com</a>
                   </li>
                 </ul>
               </div>
@@ -64,7 +63,7 @@ function Header() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/services" className={"nav-link"}>
+                      <NavLink to="/service-page" className={"nav-link"}>
                         Service
                       </NavLink>
                     </li>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
+import ProductItems from "./ProductItem";
+
 
 interface Product {
   id: number;
@@ -88,40 +90,7 @@ const ProductDetail = () => {
           <section className="space">
             <h3 className="sec-subtitle3">Related Products</h3>
             <div className="row ">
-              {products.map((product, index) => (
-                <div className="col-md-3">
-                  <div className="product-img">
-                    <a href="shop-details.html">
-                      <img
-                        src="assets/img/product/p-2-1.png"
-                        alt="product"
-                        className="w-100"
-                      />
-                    </a>
-                    <div className="actions">
-                      <a href="#" className="icon-btn">
-                        <i className="far fa-shopping-cart"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="product-body">
-                    <div className="product-content">
-                      <h3 className="product-title">
-                        <a className="text-inherit" href="shop-details.html">
-                          {product.name}
-                        </a>
-                      </h3>
-                      <div className="product-category">
-                        <a href="#">{product.serviceName}</a>
-                      </div>
-                    </div>
-                    <span className="product-price">
-                      <span className="currency">$</span>
-                      {product.price}
-                    </span>
-                  </div>
-                </div>
-              ))}
+              <ProductItems sanpham={products}/> 
             </div>
           </section>
         </div>

@@ -1,8 +1,10 @@
-import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { css } from "@emotion/css";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
-import { set, useForm, useWatch } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { useForm, useWatch } from "react-hook-form";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 interface Service {
   id: number;
   name: string;
@@ -18,7 +20,7 @@ const errorInput = css`
 
 function AddService() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -75,20 +77,22 @@ function AddService() {
 
   const onsubmit = async (data: Service) => {
     const formData = new FormData();
-    formData.append("image", data.image[0]);
+    if(data.image?.length){
+      formData.append("image", data.image[0]);
+    }
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("isActive", data.isActive.toString());
     formData.append("id", data.id ? data.id.toString() : "0");
 
-    await HttpRequestHelper()
-      .postWithFile("/api/services/save", formData)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        throw error;
-      });
+    const response = await HttpRequestHelper()
+      .postWithFile("/api/services/save", formData);
+      if (response) {
+        toast(response, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
+        return navigate(`/admin/services`);
+      } else {
+        toast(response, { type: toast.TYPE.ERROR, autoClose: 5000 });
+      }
   };
   return (
     <>

@@ -6,17 +6,16 @@ import CommonHelper from "../../utilities/CommonHelper";
 import "react-toastify/dist/ReactToastify.css";
 import "../../assets/css/DataTable.css";
 
-interface Product {
+interface Plan {
   name: string;
-  decription: string;
+  description: string;
   price: boolean;
-  serviceName: string;
   createOn: Date;
 }
 
-function ProductList() {
+function PlanList() {
   const navigate = useNavigate();
-  const [product, setProduct] = useState<Product[]>([]);
+  const [plan, setPlan] = useState<Plan[]>([]);
   const [loading, setLoading] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
 
@@ -28,23 +27,21 @@ function ProductList() {
   const getList = async (pageIndex: number, pageSize: number = 10) => {
     setLoading(true);
     const response = await HttpRequestHelper().get(
-      `/api/product/get-list?page=${pageIndex}&per_page=${pageSize}`
+      `/api/plan/get-list?page=${pageIndex}&per_page=${pageSize}`
     );
-    setProduct(response);
-    setTotalRows(response.product);
+    setPlan(response);
+    setTotalRows(response.plan);
     setLoading(false);
   };
 
-  //event delete account
-  const deleteProduct = async (id: number) => {
-    const response = await HttpRequestHelper().delete(`/api/product/${id}`);
+  const deletePlan = async (id: number) => {
+    const response = await HttpRequestHelper().delete(`/api/plan/${id}`);
     if (response) {
       getList(1);
     }
   };
-  //event edit account
   const onEdit = (id: number) => {
-    return navigate(`/admin/product/${id}`);
+    return navigate(`/admin/plan/${id}`);
   };
   /*
    * event change pageIndex
@@ -60,8 +57,8 @@ function ProductList() {
     getList(pageIndex, pageSize);
   };
 
-  const addProduct = () => {
-    return navigate(`/admin/product-form`);
+  const addPlan = () => {
+    return navigate(`/admin/plan-form`);
   };
   const columns: any = [
     {
@@ -70,7 +67,7 @@ function ProductList() {
         <>
           <span
             className="cursor-pointer"
-            onClick={() => deleteProduct(row.id)}
+            onClick={() => deletePlan(row.id)}
           >
             <i className="bi bi-trash"></i>
           </span>
@@ -85,27 +82,26 @@ function ProductList() {
       ),
       width: '70px',
     },
-    { name: "Service Name", selector: (row: any) => row.serviceName, width: '200px'},
-    { name: "Product Name", selector: (row: any) => row.name, width: '250px'},
+    { name: "Name", selector: (row: any) => row.name, width: '200px'},
     { name: "Price", selector: (row: any) => row.price, width: '150px'},
     { name: "Create On", selector: (row: any) => CommonHelper().formatDate(row.createOn), width: '150px'},
-    { name: "Description", selector: (row: any) => row.decription},
+    { name: "Description", selector: (row: any) => row.description},
   ];
 
   return (
     <>
       <div className="row">
         <div className="col-12">
-          <h3>Product List</h3>
+          <h3>Plan List</h3>
           <button
             className="btn btn-primary btn-sm"
-            onClick={() => addProduct()}
+            onClick={() => addPlan()}
           >
-            Add Product
+            Add Plan
           </button>
           <DataTable
             columns={columns}
-            data={product}
+            data={plan}
             progressPending={loading}
             pagination
             paginationServer
@@ -119,4 +115,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default PlanList;
