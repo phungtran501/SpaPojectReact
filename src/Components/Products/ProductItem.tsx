@@ -29,7 +29,7 @@ const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
                                 <img
                                     src={`${HttpRequestHelper().baseURL}/image/product/${product.id}.png`}
                                     alt="product"
-                                    className="w-100" />
+                                    className="w-100" style={{ width: "285px", height: "308px"}}/>
                             </a>
                             <div className="actions">
                                 <a href="#" className="icon-btn">

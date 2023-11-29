@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { css } from "@emotion/css";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Account {
   id: string;
@@ -26,6 +28,7 @@ const errorInput = css`
 function FormAccount() {
   const { id } = useParams<string>();
   const [roles, setRole] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -66,16 +69,15 @@ function FormAccount() {
   };
 
   const onsubmit = async (data: Account) => {
-    await HttpRequestHelper()
-      .post("/api/account/save", data)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        throw error;
-      });
+    const response =  await HttpRequestHelper().post("/api/account/save", data);
+    if (response) {
+      toast(response.message, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
+      return navigate(`/admin/accounts`);
+    } else {
+      toast(response.message, { type: toast.TYPE.ERROR, autoClose: 5000 });
+    }
   };
-  return (
+  return ( 
     <>
       <section>
         <div className="container mt-4">

@@ -2,6 +2,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import HttpRequestHelper from "../utilities/HttpRequestHelper";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import serviveImage from "../assets/img/service/service-detail-page.jpg";
 
 interface Service {
   id: number;
@@ -12,6 +13,7 @@ interface Product {
   id: number;
   name: string;
   description: string;
+  image: any;
 }
 
 const ServiceDetail = () => {
@@ -25,7 +27,6 @@ const ServiceDetail = () => {
     getService(id);
     getListService();
     getProducts(id);
-    
   }, []);
 
   //get service
@@ -58,7 +59,7 @@ const ServiceDetail = () => {
     return navigate(`/product/${id}`);
   };
 
-  //list product 
+  //list product
   const getProducts = async (id: any) => {
     try {
       const response = await HttpRequestHelper().get(
@@ -78,7 +79,7 @@ const ServiceDetail = () => {
             <div className="col-lg-8 col-xl mb-30 mb-lg-0">
               <div className="mb-30">
                 <div className="mega-hover">
-                  <img src="assets/img/service/s-d-1-1.jpg" alt="thumbnail" />
+                  <img src={serviveImage} alt="thumbnail" />
                 </div>
               </div>
               <h2 className="text-uppercase">{service?.name}</h2>
@@ -86,32 +87,28 @@ const ServiceDetail = () => {
               <div className="list-style2">
                 <ul className="list-unstyled">
                   {products.map((product, index) => (
-                    <li key={index} onClick={() => detailProduct(product.id)}>
-                      {product.name}
+                    <li key={index}>
+                      <a
+                        onClick={() => detailProduct(product.id)}
+                        className="cursor-pointer"
+                      >
+                        {" "}
+                        <h4>{product.name}</h4>
+                      </a>
+                      <div className="text-center">
+                        <img
+                          src={`${HttpRequestHelper().baseURL}/image/product/${
+                            product.id
+                          }.png`}
+                          alt="icon"
+                          style={{ height: "400px" }}
+                          className="pb-3"
+                        />
+                      </div>
                       <p>{product.description}</p>
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div className="row">
-                <div className="col-6 mb-30">
-                  <div className="mega-hover">
-                    <img
-                      src="assets/img/service/s-d-1-2.jpg"
-                      alt="shape"
-                      className="w-100"
-                    />
-                  </div>
-                </div>
-                <div className="col-6 mb-30">
-                  <div className="mega-hover">
-                    <img
-                      src="assets/img/service/s-d-1-3.jpg"
-                      alt="shape"
-                      className="w-100"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
             <div className="col-lg-4 col-xl-auto">
@@ -120,9 +117,10 @@ const ServiceDetail = () => {
                   <h3 className="box-title">All Services</h3>
                   <ul className="list-unstyled">
                     {services.map((service, index) => (
-                      <li key={index} >
-                        
-                         <Link to={`/services/${service.id}`}>{service.name}</Link> 
+                      <li key={index}>
+                        <Link to={`/services/${service.id}`}>
+                          {service.name}
+                        </Link>
                       </li>
                     ))}
                   </ul>

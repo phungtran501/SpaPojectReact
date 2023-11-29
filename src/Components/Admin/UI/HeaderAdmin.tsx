@@ -36,6 +36,9 @@ function HeaderAdmin() {
               <li className="nav-item">
                 <NavLink to="/admin/plans" className={"nav-link"}>Plan</NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink to="/admin/roles" className={"nav-link"}>Role</NavLink>
+              </li>
             </ul>
           </div>
         </div>

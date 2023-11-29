@@ -136,7 +136,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <section>
+      <section className="pb-3">
         <div className="text-center space img-quote">
           <div className="d-inline-flex mb-4 pb-1">
             <div className="circle-btn style2">

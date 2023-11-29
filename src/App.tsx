@@ -23,6 +23,8 @@ import ProductPage from "./Components/Products/ProductPage";
 import PlanList from "./Components/Admin/PlanList";
 import PlanForm from "./Components/Admin/PlanForm";
 import ServicePage from "./Components/ServicePage";
+import RoleList from "./Components/Admin/RoleList";
+import RoleForm from "./Components/Admin/RoleForm";
 
 function App() {
   const commonRoutes = [
@@ -54,6 +56,9 @@ function App() {
     { path: '/admin/plans', element: <PlanList /> },
     { path: '/admin/plan-form', element: <PlanForm /> },
     { path: '/admin/plan/:id', element: <PlanForm /> },
+    { path: '/admin/roles', element: <RoleList /> },
+    { path: '/admin/role-form', element: <RoleForm /> },
+    { path: '/admin/role/:id', element: <RoleForm /> },
   ];
 
   const router = createBrowserRouter([

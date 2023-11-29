@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import ProductItems from "./ProductItem";
+import FormatCurrency from "../../utilities/FormatCurrency";
 
 
 interface Product {
   id: number;
   name: string;
-  description: string;
+  decription: string;
   price: number;
   serviceId: number;
   serviceName: string;
+  image: any;
 }
 
 const ProductDetail = () => {
@@ -56,30 +58,17 @@ const ProductDetail = () => {
                 data-asnavfor=".product-thumb-slide"
               >
                 <div className="img">
-                  <img
-                    src="assets/img/product/p-d-1-1.png"
-                    alt="Product Image"
-                  />
+                <img src={`${HttpRequestHelper().baseURL}/image/product/${product?.id}.png`} 
+                      alt="icon"/>
                 </div>
               </div>
             </div>
             <div className="col-lg-6 align-self-center">
               <div className="product-about">
                 <h2 className="product-title">{product?.name}</h2>
-                <p className="product-price">{product?.price}</p>
-                <p className="product-text">{product?.description}.</p>
+                {<p className="product-price"> <FormatCurrency value={product?.price ?? 0}/></p>}
+                <p className="product-text">{product?.decription}.</p>
                 <div className="actions">
-                  <div className="quantity">
-                    <label htmlFor="quantity" className="screen-reader-text">
-                      Quantity:
-                    </label>
-                    <button className="quantity-minus qty-btn">
-                      <i className="fal fa-minus"></i>
-                    </button>
-                    <button className="quantity-plus qty-btn">
-                      <i className="fal fa-plus"></i>
-                    </button>
-                  </div>
                   <a href="#" className="vs-btn">
                     Add to Cart
                   </a>

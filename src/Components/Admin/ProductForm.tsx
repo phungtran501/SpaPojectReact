@@ -106,16 +106,13 @@ function ProductForm() {
     formData.append("isActive", data.isActive.toString());
     formData.append("id", data.id ? data.id.toString() : "0");
 
-    //data.price = parseFloat(data.price.toString());
-    //data.serviceId = parseInt(data.serviceId.toString());
-
     const response = await HttpRequestHelper().postWithFile("/api/product/save", formData);
 
     if (response) {
-      toast(response, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
+      toast(response.message, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
       return navigate(`/admin/products`);
     } else {
-      toast(response, { type: toast.TYPE.ERROR, autoClose: 5000 });
+      toast(response.message, { type: toast.TYPE.ERROR, autoClose: 5000 });
     }
   };
   return (

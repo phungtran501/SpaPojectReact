@@ -70,13 +70,13 @@ function AppointmentForm() {
       "/api/appointment/save",data);
 
     if (response) {
-      toast(response, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
+      toast(response.message, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
 
       setTimeout(() => {
         return navigate(`/admin/appointments`);
       }, 3000);
     } else {
-      toast(response, { type: toast.TYPE.ERROR, autoClose: 5000 });
+      toast(response.message, { type: toast.TYPE.ERROR, autoClose: 5000 });
     }
   };
   return (

@@ -88,10 +88,10 @@ function AddService() {
     const response = await HttpRequestHelper()
       .postWithFile("/api/services/save", formData);
       if (response) {
-        toast(response, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
+        toast(response.message, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
         return navigate(`/admin/services`);
       } else {
-        toast(response, { type: toast.TYPE.ERROR, autoClose: 5000 });
+        toast(response.message, { type: toast.TYPE.ERROR, autoClose: 5000 });
       }
   };
   return (
