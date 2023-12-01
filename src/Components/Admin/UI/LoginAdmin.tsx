@@ -18,13 +18,14 @@ function LoginAdmin() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginForm>();
 
   const [formLogin, setForm] = useState<LoginForm>({
     username: "",
     password: "",
   });
+
 
   useEffect(() => {}, []);
 
@@ -39,14 +40,10 @@ function LoginAdmin() {
   }
 
   const onsubmit = async (data: LoginForm) => {
-    await HttpRequestHelper()
-      .post("/api/authentication/login", formLogin)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        throw error;
-      });
+    const response = await HttpRequestHelper()
+      .post("/api/authentication/login", data);
+      console.log(response);
+      localStorage.setItem('token', response.accessToken);
   };
 
   return (
@@ -74,10 +71,10 @@ function LoginAdmin() {
                   <input type="password" className="form-control" placeholder="Password"
                     {...register("password", {
                       required: "Password must be not empty",
-                      pattern: {
-                        message: "Invalid password",
-                        value: /[A-Za-z]+/i,
-                      },
+                      // pattern: {
+                      //   message: "Username or password is invalid",
+                      //   value: /[A-Za-z]+/i,
+                      // },
                     })}/>
                   {errors.password && (
                     <span className={errorInput}>

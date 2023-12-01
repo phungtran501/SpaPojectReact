@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, redirect, useNavigate } from "react-router-dom";
 import AboutUs from "./Components/AboutUs";
 import MasterPage from "./Components/UI/MasterPage/MasterPage";
 import Home from "./Components/Home";
@@ -25,8 +25,12 @@ import PlanForm from "./Components/Admin/PlanForm";
 import ServicePage from "./Components/ServicePage";
 import RoleList from "./Components/Admin/RoleList";
 import RoleForm from "./Components/Admin/RoleForm";
+import { useEffect } from "react";
+import AuthHandler  from "./utilities/AuthHandler";
 
 function App() {
+  
+
   const commonRoutes = [
     { path: "/", element: <Home /> },
     { path: "/about", element: <AboutUs /> },
@@ -40,25 +44,25 @@ function App() {
   ];
 
   const adminRoutes = [
-    { path: '/admin', element: <Dashboard /> },
-    { path: '/admin/services', element: <ServiceList /> },
-    { path: '/admin/service', element: <AddService /> },
-    { path: '/admin/service/:id/detail', element: <AddService /> },
-    { path: '/admin/accounts', element: <AccountList /> },
-    { path: '/admin/account-form', element: <FormAccount /> },
-    { path: '/admin/account/:id', element: <FormAccount /> },
-    { path: '/admin/products', element: <ProductList /> },
-    { path: '/admin/product-form', element: <ProductForm /> },
-    { path: '/admin/product/:id', element: <ProductForm /> },
-    { path: '/admin/appointments', element: <AppointmentList /> },
-    { path: '/admin/appointment-form', element: <AppointmentForm /> },
-    { path: '/admin/appointment/:id', element: <AppointmentForm /> },
-    { path: '/admin/plans', element: <PlanList /> },
+    { path: '/admin', loader: AuthHandler, element: <Dashboard /> },
+    { path: '/admin/services', loader: AuthHandler, element: <ServiceList /> },
+    { path: '/admin/service', loader: AuthHandler, element: <AddService /> },
+    { path: '/admin/service/:id/detail', loader: AuthHandler, element: <AddService /> },
+    { path: '/admin/accounts', loader: AuthHandler, element: <AccountList /> },
+    { path: '/admin/account-form', loader: AuthHandler, element: <FormAccount /> },
+    { path: '/admin/account/:id', loader: AuthHandler, element: <FormAccount /> },
+    { path: '/admin/products', loader: AuthHandler, element: <ProductList /> },
+    { path: '/admin/product-form', loader: AuthHandler, element: <ProductForm /> },
+    { path: '/admin/product/:id', loader: AuthHandler, element: <ProductForm /> },
+    { path: '/admin/appointments', loader: AuthHandler, element: <AppointmentList /> },
+    { path: '/admin/appointment-form', loader: AuthHandler, element: <AppointmentForm /> },
+    { path: '/admin/appointment/:id', loader: AuthHandler, element: <AppointmentForm /> },
+    { path: '/admin/plans', loader: AuthHandler, element: <PlanList /> },
     { path: '/admin/plan-form', element: <PlanForm /> },
-    { path: '/admin/plan/:id', element: <PlanForm /> },
-    { path: '/admin/roles', element: <RoleList /> },
-    { path: '/admin/role-form', element: <RoleForm /> },
-    { path: '/admin/role/:id', element: <RoleForm /> },
+    { path: '/admin/plan/:id', loader: AuthHandler, element: <PlanForm /> },
+    { path: '/admin/roles', loader: AuthHandler, element: <RoleList /> },
+    { path: '/admin/role-form', loader: AuthHandler, element: <RoleForm /> },
+    { path: '/admin/role/:id', loader: AuthHandler, element: <RoleForm /> },
   ];
 
   const router = createBrowserRouter([
@@ -68,6 +72,7 @@ function App() {
     },
     {
       element: <MasterPageAdmin />,
+      loader: AuthHandler,
       children: adminRoutes,
     },
     {

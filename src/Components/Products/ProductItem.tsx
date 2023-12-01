@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Product } from "./Model/ProductModel";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper"
-
+import FormatCurrency from "../../utilities/FormatCurrency";
 
 interface ProductItemsProps {
     sanpham: Product[]; 
@@ -61,8 +61,8 @@ const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
                                 </div>
                             </div>
                             <span className="product-price">
-                                <span className="currency">$</span>
-                                {product.price}
+                                <span className="currency"><FormatCurrency value={product?.price ?? 0}/></span>
+                                
                             </span>
                         </div>
                     </div>
