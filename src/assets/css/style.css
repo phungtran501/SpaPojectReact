@@ -2363,7 +2363,7 @@ textarea.is-invalid {
 
 .social-style1 {
   /* background-color: #2d353c; */
-  padding: 10px 25px;
+  padding: 10px 5px;
 }
 .social-style1 a:hover {
   color: var(--theme-color);

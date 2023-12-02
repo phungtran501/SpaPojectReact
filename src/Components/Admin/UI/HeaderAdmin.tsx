@@ -1,6 +1,24 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, redirect } from "react-router-dom";
 
 function HeaderAdmin() {
+
+  const userName = ()=> {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const tokenData = JSON.parse(atob(token.split('.')[1]));
+    return tokenData.Username;
+
+  }
+}
+
+const logOut = () => {
+  
+  localStorage.clear();
+  return redirect(`/admin/login`);
+}
+  
+
+  
   return (
     <>
       <div className="header-top">
@@ -8,7 +26,7 @@ function HeaderAdmin() {
           <div className="row justify-content-center justify-content-md-between align-items-center">
             <div className="col-auto d-none d-md-block">
               <div className="social-style1 login-admin">
-                <NavLink to="/admin/login" className={"nav-link"}>Login</NavLink>
+                <NavLink to="#" onClick={() => logOut()} className={"nav-link"}>Hello {userName()} / LogOut</NavLink>
               </div>
             </div>
           </div>

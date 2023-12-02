@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const baseURL = "https://localhost:44309";
@@ -12,12 +11,19 @@ const HttpRequestHelper = () => {
     },
   });
 
-  const axiosFile = axios.create({
-    baseURL,
-    headers: {
-      "Content-Type": "multipart/form-data",
+  axiosInstance.interceptors.request.use(
+    function (config) {
+      const token = localStorage.getItem("token");
+      config.headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+      return config;
     },
-  });
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
   const get = async (url) => {
     const response = await axiosInstance.get(url);

@@ -75,7 +75,7 @@ function PlanForm() {
   };
 
   const getProduct = async () => {
-    const products = await HttpRequestHelper().get("/api/product/get-products");
+    const products = await HttpRequestHelper().get("/api/product/get-dropdownlist-products");
     setProduct(products);
   };
 

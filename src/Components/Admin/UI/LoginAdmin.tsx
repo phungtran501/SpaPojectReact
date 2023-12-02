@@ -1,7 +1,9 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { css } from "@emotion/css";
 import HttpRequestHelper from "../../../utilities/HttpRequestHelper";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const errorInput = css`
   font-style: italic;
@@ -20,6 +22,8 @@ function LoginAdmin() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>();
+
+  const navigate = useNavigate();
 
   const [formLogin, setForm] = useState<LoginForm>({
     username: "",
@@ -42,8 +46,16 @@ function LoginAdmin() {
   const onsubmit = async (data: LoginForm) => {
     const response = await HttpRequestHelper()
       .post("/api/authentication/login", data);
-      console.log(response);
+      
+    if(response){
       localStorage.setItem('token', response.accessToken);
+      return navigate('/admin');
+    }
+    toast("Login failed", {
+      type: toast.TYPE.WARNING,
+      autoClose: 5000,
+    });
+      
   };
 
   return (
