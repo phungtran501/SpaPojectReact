@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter, redirect, useNavigate } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AboutUs from "./Components/AboutUs";
 import MasterPage from "./Components/UI/MasterPage/MasterPage";
 import Home from "./Components/Home";
@@ -25,7 +25,6 @@ import PlanForm from "./Components/Admin/PlanForm";
 import ServicePage from "./Components/ServicePage";
 import RoleList from "./Components/Admin/RoleList";
 import RoleForm from "./Components/Admin/RoleForm";
-import { useEffect } from "react";
 import AuthHandler  from "./utilities/AuthHandler";
 
 function App() {
