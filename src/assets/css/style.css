@@ -12319,3 +12319,6 @@ blockquote.vs-quote cite:before {
 .login-admin{
   padding-left: 1100px;
 }
+.background-image-service-page{
+  background-image: url(../img//bg/body-bg-1.jpg);
+}

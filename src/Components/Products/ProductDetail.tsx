@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper";
 import ProductItems from "./ProductItem";
 import FormatCurrency from "../../utilities/FormatCurrency";
-
+import { useAppDispatch } from "../../redux/configureStore";
+import { setCart } from "../Cart/CartSlice";
 
 interface Product {
   id: number;
@@ -19,6 +20,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<Product>();
   const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     getProduct(id);
@@ -37,7 +39,10 @@ const ProductDetail = () => {
     }
   };
 
-  //list product
+  const handleAddItem = (productId: number) => {
+    dispatch(setCart(productId));
+  };
+
   const randomProduct = async () => {
     const products = await HttpRequestHelper().get(
       "/api/product/random-product"
@@ -58,20 +63,35 @@ const ProductDetail = () => {
                 data-asnavfor=".product-thumb-slide"
               >
                 <div className="img">
-                <img src={`${HttpRequestHelper().baseURL}/image/product/${product?.id}.png`} 
-                      alt="icon"/>
+                  <img
+                    src={`${HttpRequestHelper().baseURL}/image/product/${
+                      product?.id
+                    }.png`}
+                    alt="icon"
+                  />
                 </div>
               </div>
             </div>
             <div className="col-lg-6 align-self-center">
               <div className="product-about">
                 <h2 className="product-title">{product?.name}</h2>
-                {<p className="product-price"> <FormatCurrency value={product?.price ?? 0}/></p>}
+                {
+                  <p className="product-price">
+                    {" "}
+                    <FormatCurrency value={product?.price ?? 0} />
+                  </p>
+                }
                 <p className="product-text">{product?.decription}.</p>
                 <div className="actions">
-                  <a href="#" className="vs-btn">
-                    Add to Cart
-                  </a>
+                  {
+                    <a
+                      href="#"
+                      className="vs-btn"
+                      onClick={() => handleAddItem(product?.id ?? 0)}
+                    >
+                      Add To Card
+                    </a>
+                  }
                 </div>
               </div>
             </div>
@@ -79,7 +99,7 @@ const ProductDetail = () => {
           <section className="space">
             <h3 className="sec-subtitle3">Related Products</h3>
             <div className="row ">
-              <ProductItems sanpham={products}/> 
+              <ProductItems sanpham={products} />
             </div>
           </section>
         </div>

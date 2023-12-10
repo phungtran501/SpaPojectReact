@@ -11,9 +11,10 @@ const HttpRequestHelper = () => {
     },
   });
 
+  const token = localStorage.getItem("token");
+
   axiosInstance.interceptors.request.use(
     function (config) {
-      const token = localStorage.getItem("token");
       config.headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -39,6 +40,7 @@ const HttpRequestHelper = () => {
     const response = await axios.post(`${baseURL}${url}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data;

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import aboutus from "../assets/img/about/aboutus.jpg";
-import leaf from "../assets/img/shape/leaf-1-6.png";
 
 const AboutUs = () => {
   return (

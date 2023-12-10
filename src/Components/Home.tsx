@@ -3,7 +3,6 @@ import massage from "../assets/img/service/SpaMassage.jpg";
 import icon from "../assets/img/icons/sec-bg-icon.svg";
 import React, { useEffect, useState } from "react";
 import HttpRequestHelper from "../utilities/HttpRequestHelper";
-import icon1 from "../assets/img/icons/sr-7-4.svg";
 import { useNavigate } from "react-router-dom";
 
 interface Service {

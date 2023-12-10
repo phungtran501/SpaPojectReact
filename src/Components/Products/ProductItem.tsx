@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Product } from "./Model/ProductModel";
 import HttpRequestHelper from "../../utilities/HttpRequestHelper"
 import FormatCurrency from "../../utilities/FormatCurrency";
+import { useAppDispatch } from "../../redux/configureStore";
+import { setCart } from "../Cart/CartSlice";
 
 interface ProductItemsProps {
     sanpham: Product[]; 
@@ -9,6 +11,7 @@ interface ProductItemsProps {
 
 const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const detailProduct = (id: number) => {
       return navigate(`/product/${id}`);
@@ -17,13 +20,17 @@ const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
     const detailService = (id: number) => {
       return navigate(`/services/${id}`);
     };
+
+    const handleAddItem = (productId: number) => {
+        dispatch(setCart(productId))
+      }
     
     return (
       <>
         {sanpham.map((product: Product, index: number) => {
             return (
-                <div className="col-md-6 col-xl-3">
-                    <div className="vs-product product-style2" key={index}>
+                <div className="col-md-6 col-xl-3" key={index}>
+                    <div className="vs-product product-style2">
                         <div className="product-img">
                             <a href="shop-details.html">
                                 <img
@@ -35,7 +42,7 @@ const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
                                 <a href="#" className="icon-btn">
                                     <i className="far fa-eye"></i>
                                 </a>
-                                <a href="#" className="icon-btn">
+                                <a href="#" className="icon-btn" onClick={() => handleAddItem(product.id)}>
                                     <i className="far fa-shopping-cart"></i>
                                 </a>
                             </div>

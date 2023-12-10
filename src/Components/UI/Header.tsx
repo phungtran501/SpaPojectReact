@@ -1,7 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/img/logo-5.jpg";
+import { useEffect } from "react";
+import { useAppSelector } from "../../redux/configureStore";
 
 function Header() {
+
+ const {cartProduct} = useAppSelector(state => state.cart);
+
   return (
     <>
       <div className="header-top">
@@ -81,7 +86,7 @@ function Header() {
                     href="contact.html"
                     className="vs-btn style2 d-none d-xl-inline-block"
                   >
-                    Book
+                    Cart ({cartProduct.length})
                   </a>
                 </div>
               </div>

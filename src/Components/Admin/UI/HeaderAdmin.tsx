@@ -1,4 +1,5 @@
 import { NavLink, redirect } from "react-router-dom";
+import logo from "../../../assets/img/plant.png";
 
 function HeaderAdmin() {
   const userName = () => {
@@ -17,15 +18,22 @@ function HeaderAdmin() {
   return (
     <>
       <div className="header-top">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row justify-content-center justify-content-md-between align-items-center">
-            <div className="col-auto d-none d-md-block">
-              <div className="social-style1 login-admin">
-                <NavLink to="#" onClick={() => logOut()} className={"nav-link"}>
-                  Hello {userName()}, LogOut
-                </NavLink>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <img src={logo} alt="logo" height={70}/>
+                </div>
+                <div className="social-style1">
+                  <NavLink
+                    to="#"
+                    onClick={() => logOut()}
+                    className={"nav-link"} style={{paddingTop: "20px"}}
+                  >
+                    Hello {userName()}, LogOut
+                  </NavLink>
+                </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

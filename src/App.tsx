@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AboutUs from "./Components/AboutUs";
+import Appointment from "./Components/Appointment";
 import MasterPage from "./Components/UI/MasterPage/MasterPage";
 import Home from "./Components/Home";
 import ProductDetail from "./Components/Products/ProductDetail";
@@ -9,6 +10,7 @@ import Dashboard from "./Components/Admin/DashBoard";
 import LoginAdmin from "./Components/Admin/UI/LoginAdmin";
 import ServiceList from "./Components/Admin/ServiceList";
 import Register from "./Components/Register";
+import Cart from "./Components/Cart/Cart";
 import AddService from "./Components/Admin/AddService";
 import AccountList from "./Components/Admin/AccountList";
 import FormAccount from "./Components/Admin/FormAccount";
@@ -36,9 +38,11 @@ function App() {
     { path: "/service-page", element: <ServicePage /> },
     { path: "/services/:id", element: <ServiceDetail /> },
     { path: "/login", element: <Login /> },
+    { path: "/cart", element: <Cart /> },
     { path: "/register", element: <Register /> },
     { path: "/product/:id", element: <ProductDetail /> },
     { path: "/product", element: <ProductPage /> },
+    { path: "/appointment/:id", element: <Appointment /> },
     { path: "*", element: <Home /> }
   ];
 
