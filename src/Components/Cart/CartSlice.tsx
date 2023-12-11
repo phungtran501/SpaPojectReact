@@ -13,7 +13,10 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    setCart: (state: CartState, action) => {
+    setAllCart: (state: CartState, action) => {
+      state.cartProduct = action.payload;
+    },
+    setCart: (state: CartState, action) => { 
       const exitsProduct = state.cartProduct.find(
         (product) => product.id === action.payload
       );
@@ -30,10 +33,15 @@ export const cartSlice = createSlice({
         const newProduct = [...state.cartProduct, product];
 
         state.cartProduct = newProduct;
+        
       }
-      console.log(state.cartProduct);
+      localStorage.setItem("cart", JSON.stringify(state.cartProduct));
     },
   },
 });
 
-export const { setCart } = cartSlice.actions;
+export const { setCart, setAllCart } = cartSlice.actions;
+
+
+
+

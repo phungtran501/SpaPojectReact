@@ -27,10 +27,22 @@ import PlanForm from "./Components/Admin/PlanForm";
 import ServicePage from "./Components/ServicePage";
 import RoleList from "./Components/Admin/RoleList";
 import RoleForm from "./Components/Admin/RoleForm";
-import AuthHandler  from "./utilities/AuthHandler";
+import AuthHandler from "./utilities/AuthHandler";
+import { useEffect } from "react";
+import { useAppDispatch } from "./redux/configureStore";
+import { setAllCart, setCart } from "./Components/Cart/CartSlice";
 
 function App() {
-  
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const cart = localStorage.getItem("cart");
+
+    if (cart) {
+      const cartItems = JSON.parse(cart);
+      dispatch(setAllCart(cartItems));
+    }
+  }, []);
 
   const commonRoutes = [
     { path: "/", element: <Home /> },
@@ -43,29 +55,61 @@ function App() {
     { path: "/product/:id", element: <ProductDetail /> },
     { path: "/product", element: <ProductPage /> },
     { path: "/appointment/:id", element: <Appointment /> },
-    { path: "*", element: <Home /> }
+    { path: "*", element: <Home /> },
   ];
 
   const adminRoutes = [
-    { path: '/admin', loader: AuthHandler, element: <Dashboard /> },
-    { path: '/admin/services', loader: AuthHandler, element: <ServiceList /> },
-    { path: '/admin/service', loader: AuthHandler, element: <AddService /> },
-    { path: '/admin/service/:id/detail', loader: AuthHandler, element: <AddService /> },
-    { path: '/admin/accounts', loader: AuthHandler, element: <AccountList /> },
-    { path: '/admin/account-form', loader: AuthHandler, element: <FormAccount /> },
-    { path: '/admin/account/:id', loader: AuthHandler, element: <FormAccount /> },
-    { path: '/admin/products', loader: AuthHandler, element: <ProductList /> },
-    { path: '/admin/product-form', loader: AuthHandler, element: <ProductForm /> },
-    { path: '/admin/product/:id', loader: AuthHandler, element: <ProductForm /> },
-    { path: '/admin/appointments', loader: AuthHandler, element: <AppointmentList /> },
-    { path: '/admin/appointment-form', loader: AuthHandler, element: <AppointmentForm /> },
-    { path: '/admin/appointment/:id', loader: AuthHandler, element: <AppointmentForm /> },
-    { path: '/admin/plans', loader: AuthHandler, element: <PlanList /> },
-    { path: '/admin/plan-form', element: <PlanForm /> },
-    { path: '/admin/plan/:id', loader: AuthHandler, element: <PlanForm /> },
-    { path: '/admin/roles', loader: AuthHandler, element: <RoleList /> },
-    { path: '/admin/role-form', loader: AuthHandler, element: <RoleForm /> },
-    { path: '/admin/role/:id', loader: AuthHandler, element: <RoleForm /> },
+    { path: "/admin", loader: AuthHandler, element: <Dashboard /> },
+    { path: "/admin/services", loader: AuthHandler, element: <ServiceList /> },
+    { path: "/admin/service", loader: AuthHandler, element: <AddService /> },
+    {
+      path: "/admin/service/:id/detail",
+      loader: AuthHandler,
+      element: <AddService />,
+    },
+    { path: "/admin/accounts", loader: AuthHandler, element: <AccountList /> },
+    {
+      path: "/admin/account-form",
+      loader: AuthHandler,
+      element: <FormAccount />,
+    },
+    {
+      path: "/admin/account/:id",
+      loader: AuthHandler,
+      element: <FormAccount />,
+    },
+    { path: "/admin/products", loader: AuthHandler, element: <ProductList /> },
+    {
+      path: "/admin/product-form",
+      loader: AuthHandler,
+      element: <ProductForm />,
+    },
+    {
+      path: "/admin/product/:id",
+      loader: AuthHandler,
+      element: <ProductForm />,
+    },
+    {
+      path: "/admin/appointments",
+      loader: AuthHandler,
+      element: <AppointmentList />,
+    },
+    {
+      path: "/admin/appointment-form",
+      loader: AuthHandler,
+      element: <AppointmentForm />,
+    },
+    {
+      path: "/admin/appointment/:id",
+      loader: AuthHandler,
+      element: <AppointmentForm />,
+    },
+    { path: "/admin/plans", loader: AuthHandler, element: <PlanList /> },
+    { path: "/admin/plan-form", element: <PlanForm /> },
+    { path: "/admin/plan/:id", loader: AuthHandler, element: <PlanForm /> },
+    { path: "/admin/roles", loader: AuthHandler, element: <RoleList /> },
+    { path: "/admin/role-form", loader: AuthHandler, element: <RoleForm /> },
+    { path: "/admin/role/:id", loader: AuthHandler, element: <RoleForm /> },
   ];
 
   const router = createBrowserRouter([

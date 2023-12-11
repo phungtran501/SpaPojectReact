@@ -1,11 +1,14 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo-5.jpg";
-import { useEffect } from "react";
 import { useAppSelector } from "../../redux/configureStore";
 
 function Header() {
 
  const {cartProduct} = useAppSelector(state => state.cart);
+ const navigate = useNavigate();
+ const cart = () => {
+  return navigate(`/cart`);
+};
 
   return (
     <>
@@ -83,7 +86,7 @@ function Header() {
               <div className="col-auto">
                 <div className="header-icons">
                   <a
-                    href="contact.html"
+                    href="#" onClick={() => cart()}
                     className="vs-btn style2 d-none d-xl-inline-block"
                   >
                     Cart ({cartProduct.length})
