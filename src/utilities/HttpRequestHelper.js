@@ -15,6 +15,7 @@ const HttpRequestHelper = () => {
 
   axiosInstance.interceptors.request.use(
     function (config) {
+      
       config.headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

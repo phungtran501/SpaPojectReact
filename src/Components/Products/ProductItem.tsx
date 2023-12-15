@@ -4,6 +4,8 @@ import HttpRequestHelper from "../../utilities/HttpRequestHelper"
 import FormatCurrency from "../../utilities/FormatCurrency";
 import { useAppDispatch } from "../../redux/configureStore";
 import { setCart } from "../Cart/CartSlice";
+import { CartProduct } from "../Cart/Model/CartProduct";
+
 
 interface ProductItemsProps {
     sanpham: Product[]; 
@@ -22,7 +24,11 @@ const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
     };
 
     const handleAddItem = (productId: number) => {
-        dispatch(setCart(productId))
+        const data: CartProduct ={
+            id: productId,
+            quantity: 1
+        };
+        dispatch(setCart(data))
       }
     
     return (
@@ -68,7 +74,7 @@ const ProductItems: React.FC<ProductItemsProps> = ({sanpham}) => {
                                 </div>
                             </div>
                             <span className="product-price">
-                                <span className="currency"><FormatCurrency value={product?.price ?? 0}/></span>
+                                <span className="currency">{FormatCurrency(product?.price ?? 0)}</span>
                                 
                             </span>
                         </div>

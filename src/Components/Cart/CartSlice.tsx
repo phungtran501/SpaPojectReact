@@ -17,30 +17,35 @@ export const cartSlice = createSlice({
       state.cartProduct = action.payload;
     },
     setCart: (state: CartState, action) => { 
+
+      const { id, quantity } = action.payload as CartProduct;
+
       const exitsProduct = state.cartProduct.find(
-        (product) => product.id === action.payload
+        (product) => product.id === id
       );
 
       if (exitsProduct) {
-        exitsProduct.quantity += 1;
+         exitsProduct.quantity += quantity;
         state.cartProduct = state.cartProduct;
       } else {
-        const product: CartProduct = {
-          id: action.payload,
-          quantity: 1,
-        };
 
-        const newProduct = [...state.cartProduct, product];
+        const newProduct = [...state.cartProduct, action.payload];
 
         state.cartProduct = newProduct;
         
       }
       localStorage.setItem("cart", JSON.stringify(state.cartProduct));
     },
+    removeItem: (state: CartState, action) => {
+      const {id} = action.payload;
+      const item = state.cartProduct.findIndex(x => x.id === id);
+      state.cartProduct.splice(item, 1);
+      localStorage.setItem("cart", JSON.stringify(state.cartProduct));
+    }
   },
 });
 
-export const { setCart, setAllCart } = cartSlice.actions;
+export const { setCart, setAllCart, removeItem } = cartSlice.actions;
 
 
 

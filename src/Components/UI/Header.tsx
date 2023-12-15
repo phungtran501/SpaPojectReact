@@ -6,8 +6,14 @@ function Header() {
 
  const {cartProduct} = useAppSelector(state => state.cart);
  const navigate = useNavigate();
+ const username = localStorage.getItem("user");
  const cart = () => {
   return navigate(`/cart`);
+};
+
+const logOut = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
 };
 
   return (
@@ -32,6 +38,20 @@ function Header() {
                 </ul>
               </div>
             </div>
+            {
+              username ? (
+              <>
+                <div className="col-auto d-none d-md-block">
+              <div className="social-style1">
+                <a className="social-style1">Hello {username}</a>
+                &nbsp;
+                <NavLink to="/" className={"nav-link"} onClick={() => logOut()}>
+                  LogOut
+                </NavLink>
+              </div>
+            </div>
+              </>
+            )  : (<>
             <div className="col-auto d-none d-md-block">
               <div className="social-style1">
                 <NavLink to="/login" className={"nav-link"}>
@@ -43,6 +63,9 @@ function Header() {
                 </NavLink>
               </div>
             </div>
+              </>)
+            }
+            
           </div>
         </div>
       </div>
@@ -85,12 +108,12 @@ function Header() {
               </div>
               <div className="col-auto">
                 <div className="header-icons">
-                  <a
-                    href="#" onClick={() => cart()}
-                    className="vs-btn style2 d-none d-xl-inline-block"
-                  >
-                    Cart ({cartProduct.length})
-                  </a>
+                  <span
+                     onClick={() => cart()}
+                    className="vs-btn style2 d-none d-xl-inline-block cursor-pointer" style={{ color: "white" }}
+                  > <i className="bi bi-cart fs-4"></i>
+                    ({cartProduct.length})
+                  </span>
                 </div>
               </div>
             </div>

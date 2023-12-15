@@ -5,6 +5,7 @@ import ProductItems from "./ProductItem";
 import FormatCurrency from "../../utilities/FormatCurrency";
 import { useAppDispatch } from "../../redux/configureStore";
 import { setCart } from "../Cart/CartSlice";
+import { CartProduct } from "../Cart/Model/CartProduct";
 
 interface Product {
   id: number;
@@ -40,7 +41,11 @@ const ProductDetail = () => {
   };
 
   const handleAddItem = (productId: number) => {
-    dispatch(setCart(productId));
+    const data: CartProduct={
+      id: productId,
+      quantity: 1
+    }
+    dispatch(setCart(data));
   };
 
   const randomProduct = async () => {
@@ -77,8 +82,8 @@ const ProductDetail = () => {
                 <h2 className="product-title">{product?.name}</h2>
                 {
                   <p className="product-price">
-                    {" "}
-                    <FormatCurrency value={product?.price ?? 0} />
+                    
+                    {FormatCurrency(product?.price ?? 0)}
                   </p>
                 }
                 <p className="product-text">{product?.decription}.</p>
